@@ -11,7 +11,7 @@ my_dict = {
     'set': {1, 10, 100, 1000, 1000},
  }
 
-print(f'Последний элемент словаря {my_dict['tuple'][-1]}')
+print(f"Последний элемент словаря {my_dict['tuple'][-1]}")
 my_dict['list'].append('black')
 my_dict['list'].pop(1)
 my_dict['dict']['i am a tuple'] = True
