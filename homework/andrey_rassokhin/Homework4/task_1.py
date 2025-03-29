@@ -5,11 +5,11 @@ my_dict = {
         'name': 'Иван',
         'second_name': 'Иванов',
         'age': '35',
-        'city': 'Mocsow',
+        'city': 'Moscow',
         'gender': 'man'
     },
     'set': {1, 10, 100, 1000, 1000},
- }
+}
 
 print(f"Последний элемент словаря {my_dict['tuple'][-1]}")
 my_dict['list'].append('black')
