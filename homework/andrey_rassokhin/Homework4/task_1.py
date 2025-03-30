@@ -14,7 +14,7 @@ my_dict = {
 print(f"Последний элемент словаря {my_dict['tuple'][-1]}")
 my_dict['list'].append('black')
 my_dict['list'].pop(1)
-my_dict['dict']['i am a tuple'] = True
+my_dict['dict'][('i am a tuple',)] = True
 my_dict['dict'].pop('age')
 my_dict['set'].add(10000)
 my_dict['set'].remove(10)
