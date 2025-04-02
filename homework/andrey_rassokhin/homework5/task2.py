@@ -1,0 +1,9 @@
+result_1 = 'результат операции: 42'
+result_2 = 'результат операции: 514'
+result_3 = 'результат работы программы: 9'
+location_1 = result_1.index(':') + 1
+location_2 = result_2.index(':') + 1
+location_3 = result_3.index(':') + 1
+print(f' Итоговый результат 1 = {int(result_1[location_1:]) + 10}, \n '
+      f'Итоговый результат 2 = {int(result_2[location_2:]) + 10}, \n'
+      f' Итоговый результат 3 = {int(result_3[location_3:]) + 10},')
