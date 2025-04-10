@@ -8,9 +8,9 @@ def fibonachi(n):
     count = 1
     while count < n:
         yield n_1
-        sum = n_1 + n_2
+        result = n_1 + n_2
         n_1 = n_2
-        n_2 = sum
+        n_2 = result
         count += 1
 
 
@@ -18,9 +18,9 @@ def number_fib(n):
     i = 1
     for number in fibonachi(1000000):
         if i == n:
+            print(number)
             break
         i += 1
-    print(number)
 
 
 number_fib(6)
