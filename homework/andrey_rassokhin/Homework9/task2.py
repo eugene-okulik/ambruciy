@@ -5,7 +5,7 @@ def hot_day():
 
 
 def average_temperature():
-    average = sum(hot_day())/len(hot_day())
+    average = sum(hot_day()) / len(hot_day())
     return round(average, 2)
 
 
