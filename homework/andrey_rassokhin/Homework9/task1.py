@@ -7,7 +7,7 @@ def transformation_from_python():
     return python_date
 
 
-def transformation_month():
+def output_full_month():
     month = transformation_from_python().month
     month_transform = datetime.datetime(2023, month, 15).strftime('%B')
     return month_transform
@@ -19,5 +19,5 @@ def transformation_from_human():
 
 
 print(transformation_from_python())
-print(transformation_month())
+print(output_full_month())
 print(transformation_from_human())
