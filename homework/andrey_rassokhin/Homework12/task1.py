@@ -67,7 +67,7 @@ class Bouquet:
         return f'Стоимость букета: {sum(flower.price * flower.quantity for flower in self.flowers)} руб.'
 
     def time_of_fading(self):
-        time_of_fading = (sum(flower.life_span for flower in self.flowers))/len(self.flowers)
+        time_of_fading = (sum(flower.life_span for flower in self.flowers)) / len(self.flowers)
         return f'Время увядания: {round(time_of_fading, 2)} дней.'
 
     def sort_for_freshness(self):
