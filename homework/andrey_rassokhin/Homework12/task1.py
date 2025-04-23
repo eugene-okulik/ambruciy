@@ -68,25 +68,25 @@ class Bouquet:
 
     def time_of_fading(self):
         time_of_fading = (sum(flower.life_span for flower in self.flowers)) / len(self.flowers)
-        return f'Время увядания: {round(time_of_fading, 2)} дней.'
+        return f'Время увядания букета: {round(time_of_fading, 2)} дней.'
 
     def sort_for_freshness(self):
         # Пришлось долго разбираться, с лямбда функцией в ключе.
         sort = sorted(self.flowers, key=lambda flower: flower.freshness)
         # Про list-comprehension вообще забыл
-        return [flower.name for flower in sort]
+        return sort
 
     def sort_for_price(self):
         sort = sorted(self.flowers, key=lambda flower: flower.price)
-        return [flower.name for flower in sort]
+        return sort
 
     def sort_for_color(self):
         sort = sorted(self.flowers, key=lambda flower: flower.color)
-        return [flower.name for flower in sort]
+        return sort
 
     def sort_for_stem_length(self):
         sort = sorted(self.flowers, key=lambda flower: flower.stem_length)
-        return [flower.name for flower in sort]
+        return sort
 
     def search_flowers(self, life_span):
         for flower in self.flowers:
