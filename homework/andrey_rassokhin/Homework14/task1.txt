@@ -1,6 +1,8 @@
-INSERT INTO students (name, second_name, group_id) VALUES ('Андрей', 'Рассохин', '222')
+INSERT INTO students (name, second_name, group_id) VALUES ('Андрей', 'Рассохин', NULL)
 
 INSERT INTO `groups` (title, start_date, end_date) VALUES ('Изучение DBeaver', 'Май 2025', 'Май 2025')
+
+UPDATE students SET group_id = '222' where id = 481
 
 INSERT INTO books (title, taken_by_student_id) VALUES ('Алгебра', '481')
 
