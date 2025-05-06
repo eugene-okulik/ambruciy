@@ -1,0 +1,57 @@
+INSERT INTO students (name, second_name, group_id) VALUES ('Андрей', 'Рассохин', NULL)
+
+INSERT INTO `groups` (title, start_date, end_date) VALUES ('Изучение DBeaver', 'Май 2025', 'Май 2025')
+
+UPDATE students SET group_id = '222' where id = 481
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('Алгебра', '481')
+
+INSERT INTO books (title, taken_by_student_id) VALUES ('История древнего мира', '481')
+
+INSERT INTO students (name, second_name, group_id) VALUES ('Андрей', 'Рассохин', '222')
+
+INSERT INTO students (name, second_name, group_id) VALUES ('Андрей', 'Рассохин', '222')
+
+INSERT INTO subjets (title) VALUES ('Алгебра')
+
+INSERT INTO subjets (title) VALUES ('История')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Понедельник', '321')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Среда', '321')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Понедельник', '322')
+
+INSERT INTO lessons (title, subject_id) VALUES ('Среда', '322')
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES ('4', '712', '481')
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES ('5', '713', '481')
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES ('4', '714', '481')
+
+INSERT INTO marks (value, lesson_id, student_id) VALUES ('5', '715', '481')
+
+SELECT value
+from marks
+where student_id = 481
+
+select title
+from books
+where taken_by_student_id = 481
+
+select s.name as 'Имя', s.second_name as 'Фамилия', g.title as 'Группа', g.start_date as 'Дата начала',g.end_date as 'Дата окончания',
+b.title as 'Название книги', m.value as 'Оценка', l.title as 'День проведения занятия', s2.title as 'Предмет'
+from students s
+join `groups` g
+on s.group_id = g.id
+join books b
+on s.id = b.taken_by_student_id
+join marks m
+on s.id = m.student_id
+join lessons l
+on m.lesson_id = l.id
+join subjets s2
+on l.subject_id = s2.id
+where s.id = 481
+
