@@ -43,11 +43,14 @@ def edit_object_with_put():
     new_object = create_object_for_test()
     data = {
         "name": "Бред Питт",
-        "data": {}
+        "data": {
+            "Профессия": "Актер"
+        }
     }
     response = requests.put(f'http://167.172.172.115:52353/object/{new_object}', json=data)
     assert response.json()["name"] == "Бред Питт", "Name incorrect"
-    assert response.json()["data"] == {}, "The data is not empty"
+    assert response.json()["data"]["Профессия"] == "Актер", "Profession incorrect"
+    assert len(list(data["data"].keys())) == 1
 
 
 def edit_object_with_patch():
