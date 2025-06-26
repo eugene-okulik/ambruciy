@@ -3,6 +3,7 @@ import requests
 
 from endpoints.endpoint import Endpoint
 
+
 class PutObject(Endpoint):
 
     @allure.step('Edit object with put method')

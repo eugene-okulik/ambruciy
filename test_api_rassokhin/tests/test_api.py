@@ -69,11 +69,11 @@ def test_patch_object(create_and_delete_obj, patch_object):
 @allure.label('owner', 'Andrey Rassokhin')
 def test_put_object(create_and_delete_obj, put_object):
     payload = {
-            "name": "Бред Питт",
-            "data": {
-                "Профессия": "Актер"
-            }
+        "name": "Бред Питт",
+        "data": {
+            "Профессия": "Актер"
         }
+    }
     put_object.edit_object_with_put(create_and_delete_obj, payload)
     put_object.check_status_code_200()
     put_object.comprasion_of_result(name=payload["name"],
