@@ -1,48 +1,62 @@
-from playwright.sync_api import Page
+from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
+import pytest
 
 
-def test_task1_get_by_role(page: Page):
-    page.goto('https://the-internet.herokuapp.com/')
-    page.get_by_role('link', name='Form Authentication').click()
-    page.get_by_role('textbox', name='username').fill('Test User')
-    page.get_by_role('textbox', name='password').fill('Password123')
-    page.get_by_role('button', name='Login').click()
+@pytest.fixture(scope='function')
+def driver():
+    driver = webdriver.Chrome()
+    driver.maximize_window()
+    yield driver
+    driver.quit()
 
 
-def test_for_demo(page: Page):
-    page.goto('https://demoqa.com/automation-practice-form')
-    first_name = page.get_by_placeholder('First Name')
-    first_name.fill('Джонни')
-    last_name = page.get_by_placeholder('Last Name')
-    last_name.fill('Депп')
-    email = page.locator('#userEmail')
-    email.fill('test@mail.ru')
-    gender = page.locator('//*[text()="Male"]')
-    gender.check()
-    mobile = page.get_by_placeholder('Mobile Number')
-    mobile.fill('8961478963')
-    date_of_birth = page.locator('#dateOfBirthInput')
-    date_of_birth.click()
-    month = page.locator('.react-datepicker__month-select')
-    month.select_option('5')
-    year = page.locator('.react-datepicker__year-select')
-    year.select_option('1963')
-    day = page.locator('//*[@aria-label="Choose Sunday, June 9th, 1963"]')
-    day.click()
-    subjects = page.locator("#subjectsInput")
-    subjects.fill("Arts")
-    subjects.press("Tab")
-    hobbies = page.locator('//*[text()="Music"]')
-    hobbies.check()
-    address = page.get_by_placeholder('Current Address')
-    address.fill('USA')
-    state = page.locator('#state')
-    state.click()
-    state = page.locator('//*[text()="Haryana"]')
-    state.click()
-    city = page.locator('#city')
-    city.click()
-    city = page.locator('//*[text()="Karnal"]')
-    city.click()
-    submit_btn = page.get_by_text('Submit')
-    submit_btn.click()
+def test_part1(driver):
+    driver.get('http://testshop.qa-practice.com/')
+    product = driver.find_element(By.CSS_SELECTOR, '[alt="Customizable Desk"]')
+    action = ActionChains(driver)
+    action.key_down(Keys.CONTROL).click(product).key_up(Keys.CONTROL).perform()
+    tabs = driver.window_handles
+    driver.switch_to.window(tabs[1])
+    add_to_card_btn = driver.find_element(By.CSS_SELECTOR, '#add_to_cart')
+    add_to_card_btn.click()
+    WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, '//*[text()="Continue Shopping"]'))).click()
+    WebDriverWait(driver, 5).until(
+        EC.presence_of_element_located((By.XPATH, '//*[text()="Item(s) added to your cart"]')))
+    driver.close()
+    driver.switch_to.window(tabs[0])
+    basket_link = driver.find_element(By.CSS_SELECTOR, '.o_wsale_my_cart')
+    basket_link.click()
+    result = driver.find_element(By.CSS_SELECTOR, '.align-top').text
+    assert result == 'Customizable Desk (Steel, White)'
+
+
+def test_part2(driver):
+    driver.get('https://magento.softwaretestingboard.com/gear/bags.html')
+    try:
+        cookie = (
+            WebDriverWait(driver, 3).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, '[aria-label="Consent"]'))))
+        cookie.click()
+    except TimeoutException:
+        print('Модалка с куками не появилась')
+    finally:
+        bags = driver.find_element(By.CSS_SELECTOR, '.item.product.product-item')
+        add_to = driver.find_element(
+            By.XPATH, '//*[@title="Add to Compare" and contains(@data-post,"14")]')
+        action = ActionChains(driver)
+        action.move_to_element(bags)
+        action.click(add_to)
+        action.perform()
+        (WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, '[data-ui-id = "message-success"]'))))
+        result = (WebDriverWait(driver, 3).until(
+            EC.presence_of_element_located((
+                By.XPATH, '//a[text()="Push It Messenger Bag"]'))).text)
+        assert result == 'Push It Messenger Bag'
