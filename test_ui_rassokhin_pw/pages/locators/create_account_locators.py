@@ -1,0 +1,10 @@
+
+FIRST_NAME = '#firstname'
+LAST_NAME = '#lastname'
+EMAIL = '#email_address'
+PASSWORD = '#password'
+CONFIRM_PASSWORD = '#password-confirmation'
+CREATE_ACCOUNT_BTN = '[title= "Create an Account"]'
+MSG = '.page.messages'
+ACCOUNT_INFORMATION = '.box-content'
+ERROR_PASSWORD = '#password-confirmation-error'

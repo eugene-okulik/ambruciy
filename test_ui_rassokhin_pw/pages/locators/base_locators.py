@@ -1,0 +1,2 @@
+
+COOKIE = '[aria-label="Consent"]'
